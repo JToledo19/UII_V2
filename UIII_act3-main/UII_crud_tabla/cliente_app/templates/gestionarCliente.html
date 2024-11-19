@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+    
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Producto</h1>
+
+        <div class="card"> <!-- La tarjeta -->   
+            <div class="card-body">
+                <form action="registrarCliente/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidcliente" name="numidcliente" class="form-control" placeholder="Id cliente" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtapellido" name="txtapellido" class="form-control" placeholder="Apellido Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtfechanac" name="txtfechanac" class="form-control" placeholder="Fechanac Cliente" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcorreoelec" name="txtcorreoelec" class="form-control" placeholder="Correoelec Cliente" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numtelefono" name="numtelefono" class="form-control" placeholder="Telefono Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="direccion Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listado de cliente</h1>
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id Cliente</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo Electronico</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Fecha Nacimiento</th>
+                    <th scope="col">Direccion</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misClientes %}
+                    <tr>
+                        <td> {{m.id_cliente}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.apellido}} </td>
+                        <td> {{m.fecha_nac}} </td>
+                        <td> {{m.correo_elec}} </td>
+                        <td> {{m.telefono}} </td>
+                        <td> {{m.direccion}} </td>
+                        <td><a href="seleccionarCliente/{{m.id_cliente}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarCliente/{{m.id_cliente}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}
